@@ -46,6 +46,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     isSAMLLoginEnabled,
     prepopulateFormValues: undefined,
     emailVerificationEnabled,
+    nextPublicWebappUrl: process.env.NEXT_PUBLIC_WEBAPP_URL,
   };
 
   // username + email prepopulated from query params
