@@ -182,6 +182,7 @@ export default function Signup({
   orgAutoAcceptEmail,
   redirectUrl,
   emailVerificationEnabled,
+  nextPublicWebappUrl,
 }: SignupProps) {
   const [premiumUsername, setPremiumUsername] = useState(false);
   const [usernameTaken, setUsernameTaken] = useState(false);
@@ -354,7 +355,7 @@ export default function Signup({
                     addOnLeading={
                       orgSlug
                         ? `${getOrgFullOrigin(orgSlug, { protocol: true }).replace(URL_PROTOCOL_REGEX, "")}/`
-                        : `${process.env.NEXT_PUBLIC_WEBSITE_URL.replace(URL_PROTOCOL_REGEX, "")}/`
+                        : `${nextPublicWebappUrl.replace(URL_PROTOCOL_REGEX, "")}/`
                     }
                   />
                 ) : null}
@@ -445,7 +446,7 @@ export default function Signup({
                       onClick={async () => {
                         setIsGoogleLoading(true);
                         const username = formMethods.getValues("username");
-                        const baseUrl = process.env.NEXT_PUBLIC_WEBAPP_URL;
+                        const baseUrl = nextPublicWebappUrl;
                         const GOOGLE_AUTH_URL = `${baseUrl}/auth/sso/google`;
                         if (username) {
                           // If username is present we save it in query params to check for premium
@@ -496,7 +497,7 @@ export default function Signup({
                         sp.set("username", username);
                         sp.set("email", formMethods.getValues("email"));
                         router.push(
-                          `${process.env.NEXT_PUBLIC_WEBAPP_URL}/auth/sso/saml` + `?${sp.toString()}`
+                          `${nextPublicWebappUrl}/auth/sso/saml` + `?${sp.toString()}`
                         );
                       }}>
                       <Icon name="shield-check" className="mr-2 h-5 w-5" />
